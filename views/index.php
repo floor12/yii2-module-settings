@@ -13,6 +13,7 @@ AdminSettingsAsset::register($this);
 
 <h2><?= Yii::t('app', 'Site settings') ?></h2>
 
+<br>
 
 <?php $form = ActiveForm::begin([
     'id' => 'f12-settings-form',
