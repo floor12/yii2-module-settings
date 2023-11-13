@@ -3,10 +3,11 @@
  * @var $this View
  */
 
-use floor12\settings\Settings;
-use yii\helpers\Html;
+use floor12\settings\AdminSettingsAsset;
 use yii\web\View;
 use yii\widgets\ActiveForm;
+
+AdminSettingsAsset::register($this);
 
 ?>
 
@@ -14,24 +15,16 @@ use yii\widgets\ActiveForm;
 
 
 <?php $form = ActiveForm::begin([
-    'id' => 'settings-form',
+    'id' => 'f12-settings-form',
     'enableClientValidation' => false,
-    'enableAjaxValidation' => true,
+    'enableAjaxValidation' => false,
 ]) ?>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="setting-row">
-            <label><?= Yii::t('app', 'Enable selling:') ?></label>
-            <?= Html::checkbox('SettingsForm[values][' . Settings::ENABLE_SELLING . ']',
-                Settings::get(Settings::ENABLE_SELLING)) ?>
-        </div>
-    </div>
-</div>
+<?= $this->render(Yii::$app->getModule('settings')->settingsMainView, ['form' => $form]) ?>
 
-<div class="settings-control-block">
-    <a href="/admin/settings/index" type="reset" class="btn btn-primary">reset</a>
-    <button type="submit" class="btn btn-primary" disabled>
+<div class="f12-setting-submit-block">
+    <a href="" type="reset" class="btn btn-primary">reset</a>
+    <button type="submit" class="btn btn-primary">
         <?= Yii::t('app', 'Save') ?>
     </button>
 </div>

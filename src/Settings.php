@@ -37,4 +37,9 @@ class Settings extends ActiveRecord
         $model->value = $value;
         return $model->save();
     }
+
+    public static function fieldName(string $key): string
+    {
+        return 'SettingsForm[values][' . $key . ']';
+    }
 }

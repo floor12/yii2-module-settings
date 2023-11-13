@@ -1,4 +1,18 @@
 .f12-setting-row {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px black dotted;
+  margin: 0 0 10px 0;
 }
+
+.f12-setting-submit-block {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.f12-setting-submit-block.visible {
+  opacity: 1;
+  visibility: visible;
+}
+

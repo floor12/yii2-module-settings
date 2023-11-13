@@ -6,15 +6,16 @@ namespace floor12\settings;
 class Module extends \yii\base\Module
 {
 
-    public string $controllerNamespace = 'floor12\settings';
+    public $controllerNamespace = 'floor12\settings';
 
     /**
      * @var string Layout alias to use it admin controller
      */
-    public string $adminLayout = '@vendor/floor12/yii2-module-settings/views/index';
+    public string $adminLayout = '@app/views/layouts/main';
+    public string $settingsMainView = '@app/views/settings/_index';
 
     /**
      * @var string Role to access admin controller
      */
-    public string $administratorRole = '@';
+    public array $administratorRole = ['@'];
 }

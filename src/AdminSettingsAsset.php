@@ -4,7 +4,7 @@ namespace floor12\settings;
 
 use yii\web\AssetBundle;
 
-class TextCounterWidgetAsset extends AssetBundle
+class AdminSettingsAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/floor12/yii2-module-settings/assets';
     public $css = [
@@ -12,5 +12,9 @@ class TextCounterWidgetAsset extends AssetBundle
     ];
     public $js = [
         'f12-settings.js',
+    ];
+    public $depends = [
+        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

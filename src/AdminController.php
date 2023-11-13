@@ -2,10 +2,11 @@
 
 namespace floor12\settings;
 
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
-class SettingsController extends Controller
+class AdminController extends Controller
 {
     public function init()
     {
@@ -21,7 +22,7 @@ class SettingsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => [Role::ADMIN],
+                        'roles' => Yii::$app->getModule('settings')->administratorRole,
                     ]
                 ]
             ],
@@ -34,6 +35,6 @@ class SettingsController extends Controller
         if ($settingsForm->load(Yii::$app->request->post())) {
             $settingsForm->save();
         }
-        return $this->render('index');
+        return $this->render('@vendor/floor12/yii2-module-settings/views/index');
     }
 }
