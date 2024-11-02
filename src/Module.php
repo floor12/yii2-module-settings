@@ -6,7 +6,7 @@ namespace floor12\settings;
 class Module extends \yii\base\Module
 {
 
-    public $controllerNamespace = 'floor12\settings';
+    public $controllerNamespace = 'floor12\settings\controllers';
 
     /**
      * @var string Layout alias to use it admin controller
@@ -18,4 +18,6 @@ class Module extends \yii\base\Module
      * @var string Role to access admin controller
      */
     public array $administratorRole = ['@'];
+
+    public array $settings = [];
 }
