@@ -20,4 +20,6 @@ class Module extends \yii\base\Module
     public array $administratorRole = ['@'];
 
     public array $settings = [];
+    
+    public array $lists = [];
 }

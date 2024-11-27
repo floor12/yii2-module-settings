@@ -22,6 +22,7 @@ class SettingInputWidget extends Widget
         match ($this->type) {
             SettingType::STRING => $input = Html::input('text', $this->getName($this->name), Settings::get($this->name), ['class' => 'form-control']),
             SettingType::TEXT => $input = Html::textarea($this->getName($this->name), Settings::get($this->name), ['class' => 'form-control']),
+            SettingType::DROPDOWN => $input = Html::dropDownList($this->getName($this->name), Settings::get($this->name), \Yii::$app->getModule('settings')->lists[$this->name] ?? [], ['class' => ' form-control']),
             SettingType::COLOR => $input = Html::input('text', $this->getName($this->name), Settings::get($this->name), ['class' => ' form-control', 'type' => 'color']),
             SettingType::FILE => $input = FileInputWidget::widget([
                 'name' => $this->getName($this->name),
@@ -31,6 +32,7 @@ class SettingInputWidget extends Widget
             ])
         };
         match ($this->type) {
+            SettingType::DROPDOWN => $class = 'col-md-6',
             SettingType::STRING => $class = 'col-md-6',
             SettingType::TEXT => $class = 'col-md-6',
             SettingType::COLOR => $class = 'col-md-3',

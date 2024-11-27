@@ -12,4 +12,5 @@ class SettingType extends BaseEnum
     const BOOLEAN = 'boolean';
     const COLOR = 'color';
     const FILE = 'file';
+    const DROPDOWN = 'dropdown';
 }
