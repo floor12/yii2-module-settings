@@ -10,10 +10,10 @@ use yii\widgets\ActiveForm;
 
 AdminSettingsAsset::register($this);
 
-$this->title = 'Настройки сайта';
+$this->title = 'Настройки';
 ?>
 
-<h2>Настройки сайта</h2>
+<h1><?=$this->title?></h1>
 
 <br>
 

@@ -3,6 +3,7 @@
 namespace floor12\settings\models;
 
 use floor12\files\components\FileBehaviour;
+use floor12\files\models\File;
 use yii\db\ActiveRecord;
 
 /**
@@ -35,6 +36,7 @@ class Settings extends ActiveRecord
             $model = new Settings();
             $model->id = $key;
         }
+        self::checkFileAndUpdate($key, $value, $model->value);
         $model->value = $value;
         return $model->save();
     }
@@ -52,5 +54,22 @@ class Settings extends ActiveRecord
                 'attributes' => ['value']
             ]
         ];
+    }
+
+    private static function checkFileAndUpdate($key, $value, $oldValue)
+    {
+        foreach (\Yii::$app->getModule('settings')->settings as $group) {
+            foreach ($group as $settingKey => $settingType) {
+                if ($settingKey == $key && $settingType == SettingType::FILE && $value) {
+                    $file = File::findOne(['id' => (int)$value]);
+                    $file->object_id = $value;
+                    $file->save();
+                }
+                if ($value != $oldValue && $settingKey == $key && $settingType == SettingType::FILE && $oldValue) {
+                    $file = File::findOne(['id' => (int)$oldValue]);
+                    $file->delete();
+                }
+            }
+        }
     }
 }
