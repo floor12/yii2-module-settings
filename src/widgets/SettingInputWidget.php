@@ -20,6 +20,7 @@ class SettingInputWidget extends Widget
         $input = $class = 'col-md-6';
         $label = Html::label($this->name, $this->name);
         match ($this->type) {
+            SettingType::BOOLEAN => $input = Html::hiddenInput($this->getName($this->name), 0) . '<label>' . Html::checkbox($this->getName($this->name), Settings::get($this->name)) . ' ' . $this->name . '</label>',
             SettingType::STRING => $input = Html::input('text', $this->getName($this->name), Settings::get($this->name), ['class' => 'form-control']),
             SettingType::TEXT => $input = Html::textarea($this->getName($this->name), Settings::get($this->name), ['class' => 'form-control']),
             SettingType::DROPDOWN => $input = Html::dropDownList($this->getName($this->name), Settings::get($this->name), \Yii::$app->getModule('settings')->lists[$this->name] ?? [], ['class' => ' form-control']),
@@ -32,13 +33,18 @@ class SettingInputWidget extends Widget
             ])
         };
         match ($this->type) {
+            SettingType::BOOLEAN => $class = 'col-md-6',
             SettingType::DROPDOWN => $class = 'col-md-6',
             SettingType::STRING => $class = 'col-md-6',
             SettingType::TEXT => $class = 'col-md-6',
             SettingType::COLOR => $class = 'col-md-3',
             SettingType::FILE => $class = 'col-md-3'
-        };;
-        $data = Html::tag('div', $label . $input, ['class' => 'form-group']);
+        };
+        $input = Html::tag('div', $input, ['class' => 'form-group']);
+        if ($this->type == SettingType::BOOLEAN)
+            $data = Html::tag('div', $input, ['class' => 'form-group']);
+        else
+            $data = Html::tag('div', $label . $input, ['class' => 'form-group']);
         return Html::tag('div', $data, ['class' => $class]);
     }
 
